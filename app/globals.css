@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────────── */
+:root {
+  /* Palette (supplied): pink #FADCFE · aqua #C7F3F6 · off-white #FEFDF9 · sky #A4C6E9 · periwinkle #838BCC · lavender #B8AEE3 */
+  --pink: #fadcfe;
+  --aqua: #c7f3f6;
+  --sky: #a4c6e9;
+  --peri: #838bcc;
+  --lav: #b8aee3;
+
+  --paper: #fefdf9;
+  --paper-2: #f1eefb; /* lavender wash */
+  --ink: #23264a; /* deep indigo, derived from periwinkle: the pastels alone can't carry text */
+  --ink-2: #565b85; /* 6.4:1 on paper */
+  --line: rgb(131 139 204 / 0.38);
+  --grid: rgb(131 139 204 / 0.1);
+  --accent: #4f58a8; /* periwinkle deepened for AA: 6.2:1 on paper, 5.5:1 on paper-2 */
+  --on-accent: #fefdf9;
+  --band: var(--aqua);
+  --doodle: var(--peri);
+  --wash: 30%;
+
+  --dur-1: 150ms;
+  --dur-2: 300ms;
+  --dur-3: 600ms;
+  --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1b1d38;
+    --paper-2: #262a4d;
+    --ink: #fefdf9;
+    --ink-2: #b8aee3;
+    --line: rgb(184 174 227 / 0.28);
+    --grid: rgb(184 174 227 / 0.07);
+    --accent: #a4c6e9;
+    --on-accent: #1b1d38;
+    --band: #262a4d;
+    --doodle: var(--pink);
+    --wash: 10%;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1b1d38;
+  --paper-2: #262a4d;
+  --ink: #fefdf9;
+  --ink-2: #b8aee3;
+  --line: rgb(184 174 227 / 0.28);
+  --grid: rgb(184 174 227 / 0.07);
+  --accent: #a4c6e9;
+  --on-accent: #1b1d38;
+  --band: #262a4d;
+  --doodle: var(--pink);
+  --wash: 10%;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(180deg, color-mix(in srgb, var(--lav) var(--wash), transparent), color-mix(in srgb, var(--aqua) calc(var(--wash) / 2), transparent) 55%, transparent);
+  background-size: 32px 32px, 32px 32px, 100% 720px;
+  background-repeat: repeat, repeat, no-repeat;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+::selection {
+  background: var(--pink);
+  color: #23264a;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Blueprint details */
+.sheet-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+/* measurement ticks: a ruler edge for section dividers */
+.ticks {
+  height: 10px;
+  border-top: 1px solid var(--line);
+  background-image: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 16px);
+  background-size: 100% 6px;
+  background-repeat: no-repeat;
+}
+.placeholder-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--accent);
+}
+
+/* Staggered reveal (hero) */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.rise {
+  animation: rise var(--dur-3) var(--ease-calm) both;
+  animation-delay: calc(var(--i, 0) * 50ms);
+}
+html[data-loader] .rise {
+  animation-delay: calc(1000ms + var(--i, 0) * 50ms);
+}
+
+/* Status dot */
+/* pulse is a compositor-only transform/opacity animation: no repaint per frame */
+@keyframes pulse-dot {
+  from { transform: scale(1); opacity: 0.5; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+.status-dot {
+  position: relative; flex: none;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+}
+.status-dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse-dot 2.4s ease-out infinite;
+}
+
+.sheet { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+
+/* Ticker */
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 36s linear infinite; }
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track { animation-play-state: paused; }
+
+
+/* ── Loader (first visit only, ≤1.2 s, pure CSS so it can never get stuck) ── */
+.loader { display: none; }
+html[data-loader] .loader {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--paper);
+  animation: loader-out 200ms linear 1000ms forwards;
+}
+@keyframes loader-out { to { opacity: 0; visibility: hidden; } }
+.loader-bar {
+  position: relative;
+  display: inline-block;
+  width: 20ch;
+}
+.loader-fill {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  color: var(--accent);
+  background: var(--paper);
+  animation: loader-fill 900ms steps(20, end) forwards;
+}
+@keyframes loader-fill { to { width: 20ch; } }
+.loader-walker { animation: loader-walk 950ms var(--ease-calm) both; }
+@keyframes loader-walk {
+  from { transform: translateX(-120px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+/* ── Reduced motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-track { animation: none; }
+  html[data-loader] .loader { display: none; }
+}
+
+/* ── Mini Swagata: state machine in CSS ────────────────────────── */
+.ms { overflow: visible; transform-origin: 50% 100%; animation: ms-bob 3.2s ease-in-out infinite; will-change: transform; }
+.ms-eye, .ms-mouth, .ms-arm-l, .ms-arm-r, .ms-leg-l, .ms-leg-r {
+  transform-box: fill-box;
+  transition: transform var(--dur-2) var(--ease-spring);
+}
+.ms-eyes { transform: translate(calc(var(--lx, 0) * 1.6px), calc(var(--ly, 0) * 1.2px)); transition: transform var(--dur-1) linear; }
+.ms-eye { transform-origin: center; }
+[data-blink] .ms-eye { transform: scaleY(0.1); transition-duration: 80ms; }
+.ms-mouth { transform-origin: center; }
+.ms-arm-l { transform-origin: 100% 0; }
+.ms-arm-r { transform-origin: 0 100%; }
+.ms-leg-l, .ms-leg-r { transform-origin: 50% 0; }
+.ms-think, .ms-zzz { opacity: 0; transition: opacity var(--dur-2) linear; }
+
+@keyframes ms-bob { 50% { transform: translateY(-1.5px); } }
+@keyframes ms-wave { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-20deg); } 70% { transform: rotate(14deg); } }
+@keyframes ms-talk { 50% { transform: scaleY(1.9) scaleX(0.8); } }
+@keyframes ms-step { 0%, 100% { transform: rotate(18deg); } 50% { transform: rotate(-18deg); } }
+@keyframes ms-hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-12px); } }
+@keyframes ms-dot { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes ms-float { from { transform: translate(0, 4px); opacity: 0; } 30% { opacity: 1; } to { transform: translate(6px, -8px); opacity: 0; } }
+
+/* three waves, then rest: an endless SVG animation would keep the main thread busy */
+.ms[data-state="wave"] .ms-arm-r { animation: ms-wave 0.9s ease-in-out 3; }
+.ms[data-state="walk"] { animation-duration: 0.4s; }
+.ms[data-state="walk"] .ms-leg-l { animation: ms-step 0.4s linear infinite; }
+.ms[data-state="walk"] .ms-leg-r { animation: ms-step 0.4s linear infinite reverse; }
+.ms[data-state="point"] .ms-arm-l { transform: rotate(78deg) scale(1.25); }
+.ms[data-state="talk"] .ms-mouth { animation: ms-talk 0.32s ease-in-out infinite; }
+.ms[data-state="think"] .ms-think { opacity: 1; }
+.ms[data-state="think"] .ms-think circle { animation: ms-dot 1.2s ease-in-out infinite; }
+.ms[data-state="think"] .ms-think circle:nth-child(2) { animation-delay: 0.2s; }
+.ms[data-state="think"] .ms-think circle:nth-child(3) { animation-delay: 0.4s; }
+.ms[data-state="think"] .ms-eyes { transform: translate(1.5px, -1.5px); }
+.ms[data-state="celebrate"] { animation: ms-hop 0.5s var(--ease-calm) infinite; }
+.ms[data-state="celebrate"] .ms-arm-l { transform: rotate(110deg); }
+.ms[data-state="celebrate"] .ms-arm-r { animation: ms-wave 0.4s ease-in-out infinite; }
+.ms[data-state="jump"] { animation: ms-hop 0.5s var(--ease-calm) 1; }
+.ms[data-state="sleep"] { animation-duration: 5s; }
+.ms[data-state="sleep"] .ms-eye { transform: scaleY(0.12); }
+.ms[data-state="sleep"] .ms-zzz { opacity: 1; animation: ms-float 2.4s ease-in-out infinite; }
+
+/* Guide dock */
+@keyframes guide-in { from { transform: translateX(120px); opacity: 0; } to { transform: none; opacity: 1; } }
+.guide-in { animation: guide-in var(--dur-3) var(--ease-calm) both; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.bubble { animation: fade-in var(--dur-2) linear both; }
+.chat-panel { animation: rise var(--dur-2) var(--ease-calm) both; }
+
+/* ── Architecture diagram: stages draw in sequence ─────────────── */
+.arch-stage { animation: rise var(--dur-3) var(--ease-calm) both; animation-delay: calc(var(--i, 0) * 180ms); }
+.arch-wire {
+  background-image: repeating-linear-gradient(var(--wire-dir, 180deg), var(--accent) 0 4px, transparent 4px 8px);
+  background-size: 200% 200%;
+  animation: wire-flow 0.6s linear infinite;
+}
+@media (min-width: 64rem) { .arch-wire { --wire-dir: 90deg; } }
+@keyframes wire-flow { to { background-position: 8px 8px; } }
+
+/* Shared-element transition between the project index and a case study */
+::view-transition-group(*) { animation-duration: var(--dur-2); animation-timing-function: var(--ease-calm); }
+
+/* Copy-email celebration */
+.confetti {
+  position: absolute; width: 6px; height: 6px; border-radius: 1px; background: var(--accent);
+  animation: confetti var(--dur-3) var(--ease-calm) forwards;
+}
+.confetti:nth-child(even) { background: var(--peri); border-radius: 50%; }
+.confetti:nth-child(3n) { background: var(--pink); }
+.confetti:nth-child(4n) { background: var(--aqua); }
+@keyframes confetti {
+  from { transform: rotate(var(--a)) translateY(0) scale(1); opacity: 1; }
+  to { transform: rotate(var(--a)) translateY(-48px) scale(0.4); opacity: 0; }
+}
+
+/* ── Cursor delights (desktop, fine pointer only) ──────────────── */
+.cursor-glow, .cursor-ring { position: fixed; left: 0; top: 0; pointer-events: none; opacity: 0; will-change: transform; }
+.cursor-glow {
+  z-index: 1; width: 440px; height: 440px; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--pink) 45%, transparent), color-mix(in srgb, var(--aqua) 18%, transparent) 45%, transparent 68%);
+  transition: opacity var(--dur-2) linear;
+}
+.cursor-ring {
+  z-index: 95; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--accent);
+  transition: transform var(--dur-1) var(--ease-calm), opacity var(--dur-2) linear;
+}
+[data-magnetic] { transition: translate var(--dur-2) var(--ease-spring), scale var(--dur-1) var(--ease-spring); }
+
+/* Hand-drawn underline */
+.doodle-underline { position: relative; white-space: nowrap; }
+.doodle-underline > svg { position: absolute; left: -2%; bottom: -0.12em; width: 104%; height: 0.22em; overflow: visible; }
+.doodle-underline > svg { clip-path: inset(-100% 100% -100% -5%); animation: draw var(--dur-3) var(--ease-calm) 700ms forwards; }
+.doodle-underline path { stroke: var(--doodle); stroke-width: 5; fill: none; stroke-linecap: round; }
+html[data-loader] .doodle-underline > svg { animation-delay: 1700ms; }
+@keyframes draw { to { clip-path: inset(-100% -5% -100% -5%); } }
+
+/* 404: Mini Swagata paces, lost */
+.lost-walk { animation: lost 3s ease-in-out infinite alternate; }
+@keyframes lost { from { transform: translateX(-36px); } to { transform: translateX(36px); } }
