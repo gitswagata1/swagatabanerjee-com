@@ -340,11 +340,19 @@ html[data-loader] .doodle-underline > svg { animation-delay: 1700ms; }
   from { transform: translate3d(0, 0, 0) scale(1); }
   to { transform: translate3d(6vmax, 4vmax, 0) scale(1.15); }
 }
-.doodle {
+.parallax {
   position: absolute;
+  transform: translate3d(calc(var(--px, 0) * var(--depth, 0) * 1px), calc(var(--py, 0) * var(--depth, 0) * 1px), 0);
+  transition: transform 900ms var(--ease-calm);
+  will-change: transform;
+}
+.doodle {
+  display: block;
   will-change: transform;
   animation: doodle-float var(--d, 9s) ease-in-out infinite alternate;
 }
+.doodle.twinkle { animation: doodle-float var(--d, 9s) ease-in-out infinite alternate, twinkle 2.8s ease-in-out infinite; }
+@keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 @keyframes doodle-float {
   from { transform: translate3d(0, 0, 0) rotate(var(--r, 0deg)); }
   to { transform: translate3d(0, -22px, 0) rotate(calc(var(--r, 0deg) + 16deg)); }

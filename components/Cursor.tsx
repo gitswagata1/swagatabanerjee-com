@@ -17,11 +17,15 @@ export default function Cursor() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let frame = 0;
     let magnet: HTMLElement | null = null;
+    // background doodles drift with the cursor (see components/Backdrop.tsx)
+    const backdrop = document.querySelector<HTMLElement>(".backdrop");
 
     const move = (e: PointerEvent) => {
       if (frame) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
+        backdrop?.style.setProperty("--px", (e.clientX / window.innerWidth - 0.5).toFixed(3));
+        backdrop?.style.setProperty("--py", (e.clientY / window.innerHeight - 0.5).toFixed(3));
         const target = e.target as Element | null;
         const interactive = !!target?.closest?.("a, button, [role=button], input");
         if (glow.current) {
