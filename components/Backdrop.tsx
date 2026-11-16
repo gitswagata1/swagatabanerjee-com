@@ -23,18 +23,12 @@ const STROKES = ["var(--peri)", "var(--sky)", "var(--lav)"];
 
 // x / y are percentages of the viewport; `wide` doodles only show on larger screens.
 const DOODLES: Doodle[] = [
-  { s: "star", x: 6, y: 18, size: 34, r: -12, d: 9, o: 0.5 },
-  { s: "plus", x: 91, y: 14, size: 26, r: 10, d: 7, o: 0.45 },
-  { s: "ring", x: 82, y: 38, size: 44, r: 0, d: 11, o: 0.3, wide: true },
-  { s: "squiggle", x: 12, y: 62, size: 56, r: -8, d: 10, o: 0.4, wide: true },
-  { s: "triangle", x: 94, y: 70, size: 30, r: 18, d: 8, o: 0.35 },
-  { s: "spark", x: 70, y: 86, size: 36, r: 0, d: 12, o: 0.45, wide: true },
-  { s: "bracket", x: 3, y: 86, size: 30, r: 6, d: 9, o: 0.3 },
-  { s: "plus", x: 44, y: 8, size: 18, r: 20, d: 6, o: 0.35, wide: true },
-  { s: "star", x: 58, y: 54, size: 20, r: 14, d: 8, o: 0.25, wide: true },
-  { s: "ring", x: 28, y: 90, size: 22, r: 0, d: 7, o: 0.35, wide: true },
-  { s: "spark", x: 24, y: 34, size: 22, r: 0, d: 10, o: 0.3, wide: true },
-  { s: "squiggle", x: 62, y: 22, size: 40, r: 10, d: 13, o: 0.3, wide: true },
+  { s: "star", x: 3, y: 16, size: 30, r: -12, d: 9, o: 0.55, wide: true },
+  { s: "ring", x: 95, y: 30, size: 26, r: 0, d: 11, o: 0.5, wide: true },
+  { s: "squiggle", x: 2, y: 58, size: 40, r: -8, d: 10, o: 0.45, wide: true },
+  { s: "triangle", x: 95, y: 52, size: 24, r: 18, d: 8, o: 0.5, wide: true },
+  { s: "spark", x: 93, y: 84, size: 28, r: 0, d: 12, o: 0.45 },
+  { s: "star", x: 5, y: 88, size: 22, r: 14, d: 8, o: 0.5, wide: true },
 ];
 
 export function Backdrop() {

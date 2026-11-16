@@ -9,13 +9,13 @@
   --ink: #14152b;
   --ink-2: #5a5d72; /* 6.3:1 on paper */
   --line: rgb(20 21 43 / 0.14);
-  --grid: rgb(20 21 43 / 0.04);
+  --grid: rgb(20 21 43 / 0.028);
   --accent: #6d4aff; /* the pop — 5.1:1 on paper, 4.7:1 on paper-2 */
   --on-accent: #ffffff;
   --shadow: rgb(20 21 43 / 0.12);
   --band: var(--aqua);
   --on-band: var(--ink);
-  --blob: 70%;
+  --blob: 55%;
   --tint-amt: 60%;
   --doodle: var(--peri);
   --mark: var(--pink);
@@ -358,3 +358,11 @@ html[data-loader] .doodle-underline > svg { animation-delay: 1700ms; }
 .footer-wash { background-image: linear-gradient(115deg, var(--tint-1), var(--tint-2) 50%, var(--tint-3)); }
 /* highlighter-pen mark behind a headline word */
 .marker { background: linear-gradient(transparent 56%, var(--mark) 56%, var(--mark) 90%, transparent 90%); padding-inline: 0.04em; }
+
+/* ── Playful but polite: headline words tip when hovered; cards lift like stickers ── */
+.wiggle { display: inline-block; transition: transform var(--dur-2) var(--ease-spring); }
+.wiggle:hover { transform: rotate(-3deg) translateY(-0.04em); }
+.wiggle:nth-of-type(2n):hover { transform: rotate(3deg) translateY(-0.04em); }
+.sticker { transition: transform var(--dur-2) var(--ease-spring), box-shadow var(--dur-2) var(--ease-calm); }
+.sticker:hover { transform: translateY(-3px) rotate(-1deg); box-shadow: 4px 4px 0 var(--shadow); }
+.sticker:nth-child(even):hover { transform: translateY(-3px) rotate(1deg); }

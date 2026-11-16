@@ -20,7 +20,7 @@ function PhotoSlot({ n }: { n: 0 | 1 }) {
   return (
     <span
       aria-hidden="true"
-      className="mx-[0.12em] inline-grid h-[0.72em] w-[1.25em] -rotate-2 place-items-center rounded-full border border-dashed border-ink-2 bg-paper-2 align-middle"
+      className={`mx-[0.12em] inline-grid h-[0.72em] w-[1.25em] place-items-center rounded-full align-middle ${n ? "rotate-3 bg-[var(--tint-2)]" : "-rotate-3 bg-[var(--tint-1)]"}`}
     >
       <span className="font-mono text-[10px] tracking-wider text-ink-2">PHOTO</span>
     </span>
@@ -52,10 +52,10 @@ export function Hero() {
       >
         <span className="sr-only">{identity.name} — </span>
         <span className="whitespace-nowrap">
-          {build} <PhotoSlot n={0} />
+          <span className="wiggle">{build}</span> <PhotoSlot n={0} />
         </span>{" "}
         <br className="sm:hidden" />
-        <span className="doodle-underline marker">
+        <span className="doodle-underline marker wiggle">
           {design}
           <svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
             <path d="M1 6 C 18 1, 30 9, 48 5 S 80 2, 99 6" vectorEffect="non-scaling-stroke" />
@@ -63,7 +63,7 @@ export function Hero() {
         </span>{" "}
         <br className="sm:hidden" />
         <span className="whitespace-nowrap">
-          <PhotoSlot n={1} /> {lead}
+          <PhotoSlot n={1} /> <span className="wiggle">{lead}</span>
         </span>
       </h1>
 
@@ -104,12 +104,12 @@ export function Hero() {
 
       <div className="rise order-2 lg:order-3 lg:col-span-12" style={i(6)}>
         <div className="ticks" aria-hidden="true" />
-        <div className="pt-3 pr-14 sm:pr-28">
-          <dl className="grid flex-1 grid-cols-3 gap-x-4 gap-y-4 sm:flex sm:flex-wrap sm:gap-x-12">
+        <div className="pt-3 sm:pr-28">
+          <dl className="tints grid flex-1 grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
             {stats.map((s) => (
-              <div key={s.label} className="flex flex-col-reverse">
+              <div key={s.label} className="sticker flex flex-col-reverse rounded-2xl px-2.5 py-2 sm:px-5 sm:py-3">
                 <dt className="font-mono text-[11px] uppercase tracking-wider text-ink-2">{s.label}</dt>
-                <dd className="font-mono text-xl font-medium sm:text-3xl">
+                <dd className="font-mono text-lg font-medium sm:text-3xl">
                   <Counter {...s} />
                 </dd>
               </div>
