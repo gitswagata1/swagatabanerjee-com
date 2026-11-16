@@ -5,7 +5,7 @@ export function Recognition() {
   const { recognition, certifications } = profile;
   return (
     <Section id="recognition" sheet={profile.sheets.recognition} title="Recognition">
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="tints grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {recognition.map((r, i) => (
           <li
             key={r.title}

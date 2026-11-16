@@ -55,7 +55,7 @@ export function Hero() {
           {build} <PhotoSlot n={0} />
         </span>{" "}
         <br className="sm:hidden" />
-        <span className="doodle-underline text-accent">
+        <span className="doodle-underline marker">
           {design}
           <svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
             <path d="M1 6 C 18 1, 30 9, 48 5 S 80 2, 99 6" vectorEffect="non-scaling-stroke" />
@@ -109,7 +109,7 @@ export function Hero() {
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col-reverse">
                 <dt className="font-mono text-[11px] uppercase tracking-wider text-ink-2">{s.label}</dt>
-                <dd className="font-mono text-xl font-medium text-accent sm:text-3xl">
+                <dd className="font-mono text-xl font-medium sm:text-3xl">
                   <Counter {...s} />
                 </dd>
               </div>

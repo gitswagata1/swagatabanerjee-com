@@ -25,7 +25,7 @@ export function Journey() {
                 <span className={i === last ? "text-accent" : ""}>{String(i + 1).padStart(2, "0")}</span> · {s.term}
               </p>
               <h3 className="mt-1 font-display text-2xl font-semibold">{s.label}</h3>
-              <ul className="mt-3 space-y-2">
+              <ul className="tints mt-3 space-y-2">
                 {s.items.map((item, k) => (
                   <li
                     key={item}

@@ -6,7 +6,7 @@ const { contact, resumes, identity, sheets } = profile;
 export function Contact() {
   const link = "inline-flex h-11 items-center rounded-full border border-ink px-5 text-sm font-medium hover:bg-ink hover:text-paper";
   return (
-    <footer id="contact" aria-labelledby="contact-title" className="border-t border-line bg-paper-2">
+    <footer id="contact" aria-labelledby="contact-title" className="footer-wash border-t border-line bg-paper-2">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-8 sm:py-24">
         <p className="sheet-label">{sheets.contact}</p>
         <h2 id="contact-title" className="mt-3 max-w-4xl font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[1.02] tracking-[-0.02em]">

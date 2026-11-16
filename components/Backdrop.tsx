@@ -17,6 +17,10 @@ const SHAPES = {
 
 type Doodle = { s: keyof typeof SHAPES; x: number; y: number; size: number; r: number; d: number; o: number; wide?: boolean };
 
+const CLOSED = new Set<keyof typeof SHAPES>(["star", "ring", "triangle"]);
+const FILLS = ["var(--pink)", "var(--aqua)", "var(--sky)", "var(--lav)"];
+const STROKES = ["var(--peri)", "var(--sky)", "var(--lav)"];
+
 // x / y are percentages of the viewport; `wide` doodles only show on larger screens.
 const DOODLES: Doodle[] = [
   { s: "star", x: 6, y: 18, size: 34, r: -12, d: 9, o: 0.5 },
@@ -46,16 +50,16 @@ export function Backdrop() {
           width={d.size}
           height={d.size}
           className={`doodle ${d.wide ? "hidden md:block" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
+          fill={CLOSED.has(d.s) ? FILLS[i % FILLS.length] : "none"}
+          stroke={CLOSED.has(d.s) ? "var(--peri)" : STROKES[i % STROKES.length]}
+          strokeWidth={CLOSED.has(d.s) ? 1.4 : 2.2}
           strokeLinecap="round"
           strokeLinejoin="round"
           style={
             {
               left: `${d.x}%`,
               top: `${d.y}%`,
-              opacity: d.o,
+              opacity: Math.min(1, d.o + 0.45),
               "--r": `${d.r}deg`,
               "--d": `${d.d}s`,
               animationDelay: `${-i * 1.3}s`,

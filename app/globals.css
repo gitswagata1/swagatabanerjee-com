@@ -13,9 +13,22 @@
   --accent: #6d4aff; /* the pop — 5.1:1 on paper, 4.7:1 on paper-2 */
   --on-accent: #ffffff;
   --shadow: rgb(20 21 43 / 0.12);
-  --band: var(--accent);
-  --blob: 30%;
-  --doodle: var(--accent);
+  --band: var(--aqua);
+  --on-band: var(--ink);
+  --blob: 70%;
+  --tint-amt: 60%;
+  --doodle: var(--peri);
+  --mark: var(--pink);
+  /* Supplied palette, used as surfaces and decoration (too light for text) */
+  --pink: #fadcfe;
+  --aqua: #c7f3f6;
+  --sky: #a4c6e9;
+  --peri: #838bcc;
+  --lav: #b8aee3;
+  --tint-1: color-mix(in srgb, var(--pink) var(--tint-amt), var(--paper));
+  --tint-2: color-mix(in srgb, var(--aqua) var(--tint-amt), var(--paper));
+  --tint-3: color-mix(in srgb, var(--sky) var(--tint-amt), var(--paper));
+  --tint-4: color-mix(in srgb, var(--lav) var(--tint-amt), var(--paper));
 
   --dur-1: 150ms;
   --dur-2: 300ms;
@@ -36,7 +49,12 @@
     --accent: #9b86ff; /* 6.2:1 on the dark page */
     --on-accent: #121326;
     --shadow: rgb(0 0 0 / 0.45);
-    --blob: 26%;
+    --blob: 16%;
+    --tint-amt: 14%;
+    --band: color-mix(in srgb, var(--aqua) 18%, var(--paper));
+    --on-band: var(--ink);
+    --doodle: var(--pink);
+    --mark: color-mix(in srgb, var(--pink) 28%, var(--paper));
     color-scheme: dark;
   }
 }
@@ -50,7 +68,12 @@
   --accent: #9b86ff;
   --on-accent: #121326;
   --shadow: rgb(0 0 0 / 0.45);
-  --blob: 26%;
+  --blob: 16%;
+  --tint-amt: 14%;
+  --band: color-mix(in srgb, var(--aqua) 18%, var(--paper));
+  --on-band: var(--ink);
+  --doodle: var(--pink);
+  --mark: color-mix(in srgb, var(--pink) 28%, var(--paper));
   color-scheme: dark;
 }
 
@@ -268,7 +291,9 @@ html[data-loader] .loader {
   position: absolute; width: 6px; height: 6px; border-radius: 1px; background: var(--accent);
   animation: confetti var(--dur-3) var(--ease-calm) forwards;
 }
-.confetti:nth-child(even) { background: var(--ink); border-radius: 50%; }
+.confetti:nth-child(even) { background: var(--sky); border-radius: 50%; }
+.confetti:nth-child(3n) { background: var(--pink); }
+.confetti:nth-child(4n) { background: var(--aqua); }
 @keyframes confetti {
   from { transform: rotate(var(--a)) translateY(0) scale(1); opacity: 1; }
   to { transform: rotate(var(--a)) translateY(-48px) scale(0.4); opacity: 0; }
@@ -278,7 +303,7 @@ html[data-loader] .loader {
 .cursor-glow, .cursor-ring { position: fixed; left: 0; top: 0; pointer-events: none; opacity: 0; will-change: transform; }
 .cursor-glow {
   z-index: 1; width: 440px; height: 440px; border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 14%, transparent), transparent 65%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--pink) 50%, transparent), color-mix(in srgb, var(--aqua) 25%, transparent) 45%, transparent 68%);
   transition: opacity var(--dur-2) linear;
 }
 .cursor-ring {
@@ -304,19 +329,19 @@ html[data-loader] .doodle-underline > svg { animation-delay: 1700ms; }
 .backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
 .blob {
   position: absolute; border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) var(--blob), transparent) 0%, transparent 68%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--c) var(--blob), transparent) 0%, transparent 68%);
   will-change: transform;
   animation: blob-drift 24s ease-in-out infinite alternate;
 }
-.blob-a { width: 62vmax; height: 62vmax; left: -18vmax; top: -22vmax; }
-.blob-b { width: 48vmax; height: 48vmax; right: -16vmax; top: 18vh; animation-duration: 30s; animation-direction: alternate-reverse; }
-.blob-c { width: 54vmax; height: 54vmax; left: 22vw; bottom: -30vmax; animation-duration: 36s; }
+.blob-a { --c: var(--pink); width: 62vmax; height: 62vmax; left: -18vmax; top: -22vmax; }
+.blob-b { --c: var(--aqua); width: 48vmax; height: 48vmax; right: -16vmax; top: 18vh; animation-duration: 30s; animation-direction: alternate-reverse; }
+.blob-c { --c: var(--sky); width: 54vmax; height: 54vmax; left: 22vw; bottom: -30vmax; animation-duration: 36s; }
 @keyframes blob-drift {
   from { transform: translate3d(0, 0, 0) scale(1); }
   to { transform: translate3d(6vmax, 4vmax, 0) scale(1.15); }
 }
 .doodle {
-  position: absolute; color: var(--accent);
+  position: absolute;
   will-change: transform;
   animation: doodle-float var(--d, 9s) ease-in-out infinite alternate;
 }
@@ -324,3 +349,12 @@ html[data-loader] .doodle-underline > svg { animation-delay: 1700ms; }
   from { transform: translate3d(0, 0, 0) rotate(var(--r, 0deg)); }
   to { transform: translate3d(0, -22px, 0) rotate(calc(var(--r, 0deg) + 16deg)); }
 }
+
+/* ── Palette surfaces: children of .tints cycle pink → aqua → sky → lavender ── */
+.tints > :nth-child(4n + 1) { background-color: var(--tint-1); }
+.tints > :nth-child(4n + 2) { background-color: var(--tint-2); }
+.tints > :nth-child(4n + 3) { background-color: var(--tint-3); }
+.tints > :nth-child(4n + 4) { background-color: var(--tint-4); }
+.footer-wash { background-image: linear-gradient(115deg, var(--tint-1), var(--tint-2) 50%, var(--tint-3)); }
+/* highlighter-pen mark behind a headline word */
+.marker { background: linear-gradient(transparent 56%, var(--mark) 56%, var(--mark) 90%, transparent 90%); padding-inline: 0.04em; }
