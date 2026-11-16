@@ -208,7 +208,7 @@ export default function AvatarGuide() {
     >
       <div aria-live="polite" className="pointer-events-auto max-w-[min(17rem,calc(100vw-1.5rem))]">
         {bubble && (
-          <div className="bubble rounded-2xl rounded-br-sm border border-line bg-paper p-3 text-sm shadow-[4px_4px_0_var(--line)]">
+          <div className="bubble rounded-2xl rounded-br-sm border border-line bg-paper p-3 text-sm shadow-[4px_4px_0_var(--shadow)]">
             <div className="flex items-start gap-2">
               <p className="flex-1">{bubble.text}</p>
               <button

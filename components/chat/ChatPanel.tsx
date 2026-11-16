@@ -138,7 +138,7 @@ export default function ChatPanel({
     <section
       role="dialog"
       aria-label={chat.label}
-      className="chat-panel fixed inset-x-2 bottom-2 z-[45] flex max-h-[min(34rem,80dvh)] flex-col overflow-hidden rounded-2xl border border-line bg-paper shadow-[6px_6px_0_var(--line)] sm:inset-x-auto sm:bottom-28 sm:right-5 sm:w-[23.5rem]"
+      className="chat-panel fixed inset-x-2 bottom-2 z-[45] flex max-h-[min(34rem,80dvh)] flex-col overflow-hidden rounded-2xl border border-line bg-paper shadow-[6px_6px_0_var(--shadow)] sm:inset-x-auto sm:bottom-28 sm:right-5 sm:w-[23.5rem]"
     >
       <header className="flex items-center gap-3 border-b border-line px-4 py-2">
         <MiniSwagata state={face} decorative className="size-11 shrink-0" />

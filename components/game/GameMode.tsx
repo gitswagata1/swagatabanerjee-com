@@ -217,7 +217,7 @@ export default function GameMode({ onExit }: { onExit: () => void }) {
       {/* Collected card */}
       <div aria-live="polite" className="absolute inset-x-3 top-24 z-10 mx-auto max-w-md sm:top-28">
         {finished ? (
-          <div className="bubble border border-ink bg-paper p-4 shadow-[5px_5px_0_var(--line)]">
+          <div className="bubble border border-ink bg-paper p-4 shadow-[5px_5px_0_var(--shadow)]">
             <p className="sheet-label">FINALE</p>
             <p className="mt-1 font-display text-2xl font-semibold">{LEVELS[total - 1].items[0]}</p>
             <p className="mt-1 text-sm text-ink-2">
@@ -228,7 +228,7 @@ export default function GameMode({ onExit }: { onExit: () => void }) {
             </button>
           </div>
         ) : latest !== null ? (
-          <div key={latest} className="bubble border border-line bg-paper p-4 shadow-[5px_5px_0_var(--line)]">
+          <div key={latest} className="bubble border border-line bg-paper p-4 shadow-[5px_5px_0_var(--shadow)]">
             <p className="sheet-label">
               COLLECTED · {LEVELS[latest].label.toUpperCase()} {LEVELS[latest].term && `· ${LEVELS[latest].term.toUpperCase()}`}
             </p>
@@ -270,7 +270,7 @@ export default function GameMode({ onExit }: { onExit: () => void }) {
               <div className="absolute bottom-0 h-16 w-px -translate-x-1/2 bg-line" />
               <div
                 className={`absolute grid h-14 w-20 -translate-x-1/2 place-items-center border font-mono text-[11px] transition-all duration-300 ${
-                  got ? "border-line text-ink-2 opacity-40" : "border-accent bg-paper text-accent shadow-[3px_3px_0_var(--line)]"
+                  got ? "border-line text-ink-2 opacity-40" : "border-accent bg-paper text-accent shadow-[3px_3px_0_var(--shadow)]"
                 }`}
                 style={{ bottom: CARD_Y }}
               >

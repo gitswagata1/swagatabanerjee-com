@@ -54,7 +54,7 @@ export function BeforeVit() {
         ref={ref}
         aria-labelledby="before-vit-title"
         onClick={(e) => e.target === ref.current && ref.current?.close()}
-        className="m-auto w-[min(34rem,94vw)] -rotate-1 border border-line bg-paper-2 p-0 text-ink shadow-[8px_8px_0_var(--line)] backdrop:bg-black/60"
+        className="m-auto w-[min(34rem,94vw)] -rotate-1 border border-line bg-paper-2 p-0 text-ink shadow-[8px_8px_0_var(--shadow)] backdrop:bg-black/60"
       >
         <div className="relative p-6 sm:p-8">
           <span aria-hidden="true" className="absolute -top-0 left-1/2 h-5 w-24 -translate-x-1/2 -translate-y-1/2 rotate-2 bg-accent/40" />

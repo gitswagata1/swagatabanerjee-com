@@ -6,9 +6,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 const paper = "#fefdf9";
-const ink = "#23264a";
-const ink2 = "#565b85";
-const accent = "#4f58a8";
+const ink = "#14152b";
+const ink2 = "#5a5d72";
+const accent = "#6d4aff";
 
 /** Designed 1200×630 card for LinkedIn, WhatsApp and X previews. */
 export default function OpengraphImage() {
@@ -25,7 +25,7 @@ export default function OpengraphImage() {
           padding: 64,
           background: paper,
           color: ink,
-          backgroundImage: `linear-gradient(rgba(131,139,204,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(131,139,204,0.16) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(20,21,43,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(20,21,43,0.06) 1px, transparent 1px)`,
           backgroundSize: "40px 40px",
         }}
       >

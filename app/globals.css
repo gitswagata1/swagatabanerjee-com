@@ -2,24 +2,20 @@
 
 /* ── Design tokens ─────────────────────────────────────────────── */
 :root {
-  /* Palette (supplied): pink #FADCFE · aqua #C7F3F6 · off-white #FEFDF9 · sky #A4C6E9 · periwinkle #838BCC · lavender #B8AEE3 */
-  --pink: #fadcfe;
-  --aqua: #c7f3f6;
-  --sky: #a4c6e9;
-  --peri: #838bcc;
-  --lav: #b8aee3;
-
+  /* One popping colour on a calm neutral base.
+     The pop is an electric violet taken from the periwinkle/lavender family of the supplied palette. */
   --paper: #fefdf9;
-  --paper-2: #f1eefb; /* lavender wash */
-  --ink: #23264a; /* deep indigo, derived from periwinkle: the pastels alone can't carry text */
-  --ink-2: #565b85; /* 6.4:1 on paper */
-  --line: rgb(131 139 204 / 0.38);
-  --grid: rgb(131 139 204 / 0.1);
-  --accent: #4f58a8; /* periwinkle deepened for AA: 6.2:1 on paper, 5.5:1 on paper-2 */
-  --on-accent: #fefdf9;
-  --band: var(--aqua);
-  --doodle: var(--peri);
-  --wash: 30%;
+  --paper-2: #f5f4f1;
+  --ink: #14152b;
+  --ink-2: #5a5d72; /* 6.3:1 on paper */
+  --line: rgb(20 21 43 / 0.14);
+  --grid: rgb(20 21 43 / 0.04);
+  --accent: #6d4aff; /* the pop — 5.1:1 on paper, 4.7:1 on paper-2 */
+  --on-accent: #ffffff;
+  --shadow: rgb(20 21 43 / 0.12);
+  --band: var(--accent);
+  --blob: 30%;
+  --doodle: var(--accent);
 
   --dur-1: 150ms;
   --dur-2: 300ms;
@@ -31,32 +27,30 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #1b1d38;
-    --paper-2: #262a4d;
-    --ink: #fefdf9;
-    --ink-2: #b8aee3;
-    --line: rgb(184 174 227 / 0.28);
-    --grid: rgb(184 174 227 / 0.07);
-    --accent: #a4c6e9;
-    --on-accent: #1b1d38;
-    --band: #262a4d;
-    --doodle: var(--pink);
-    --wash: 10%;
+    --paper: #121326;
+    --paper-2: #1c1e36;
+    --ink: #f7f6f2;
+    --ink-2: #a9abc2;
+    --line: rgb(247 246 242 / 0.16);
+    --grid: rgb(247 246 242 / 0.035);
+    --accent: #9b86ff; /* 6.2:1 on the dark page */
+    --on-accent: #121326;
+    --shadow: rgb(0 0 0 / 0.45);
+    --blob: 26%;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #1b1d38;
-  --paper-2: #262a4d;
-  --ink: #fefdf9;
-  --ink-2: #b8aee3;
-  --line: rgb(184 174 227 / 0.28);
-  --grid: rgb(184 174 227 / 0.07);
-  --accent: #a4c6e9;
-  --on-accent: #1b1d38;
-  --band: #262a4d;
-  --doodle: var(--pink);
-  --wash: 10%;
+  --paper: #121326;
+  --paper-2: #1c1e36;
+  --ink: #f7f6f2;
+  --ink-2: #a9abc2;
+  --line: rgb(247 246 242 / 0.16);
+  --grid: rgb(247 246 242 / 0.035);
+  --accent: #9b86ff;
+  --on-accent: #121326;
+  --shadow: rgb(0 0 0 / 0.45);
+  --blob: 26%;
   color-scheme: dark;
 }
 
@@ -84,17 +78,15 @@ body {
   background-color: var(--paper);
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-    linear-gradient(180deg, color-mix(in srgb, var(--lav) var(--wash), transparent), color-mix(in srgb, var(--aqua) calc(var(--wash) / 2), transparent) 55%, transparent);
-  background-size: 32px 32px, 32px 32px, 100% 720px;
-  background-repeat: repeat, repeat, no-repeat;
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 ::selection {
-  background: var(--pink);
-  color: #23264a;
+  background: var(--accent);
+  color: var(--on-accent);
 }
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -276,9 +268,7 @@ html[data-loader] .loader {
   position: absolute; width: 6px; height: 6px; border-radius: 1px; background: var(--accent);
   animation: confetti var(--dur-3) var(--ease-calm) forwards;
 }
-.confetti:nth-child(even) { background: var(--peri); border-radius: 50%; }
-.confetti:nth-child(3n) { background: var(--pink); }
-.confetti:nth-child(4n) { background: var(--aqua); }
+.confetti:nth-child(even) { background: var(--ink); border-radius: 50%; }
 @keyframes confetti {
   from { transform: rotate(var(--a)) translateY(0) scale(1); opacity: 1; }
   to { transform: rotate(var(--a)) translateY(-48px) scale(0.4); opacity: 0; }
@@ -288,7 +278,7 @@ html[data-loader] .loader {
 .cursor-glow, .cursor-ring { position: fixed; left: 0; top: 0; pointer-events: none; opacity: 0; will-change: transform; }
 .cursor-glow {
   z-index: 1; width: 440px; height: 440px; border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--pink) 45%, transparent), color-mix(in srgb, var(--aqua) 18%, transparent) 45%, transparent 68%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 14%, transparent), transparent 65%);
   transition: opacity var(--dur-2) linear;
 }
 .cursor-ring {
@@ -308,3 +298,29 @@ html[data-loader] .doodle-underline > svg { animation-delay: 1700ms; }
 /* 404: Mini Swagata paces, lost */
 .lost-walk { animation: lost 3s ease-in-out infinite alternate; }
 @keyframes lost { from { transform: translateX(-36px); } to { transform: translateX(36px); } }
+
+
+/* ── Fun background: violet glows + floating doodles (see components/Backdrop.tsx) ── */
+.backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.blob {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) var(--blob), transparent) 0%, transparent 68%);
+  will-change: transform;
+  animation: blob-drift 24s ease-in-out infinite alternate;
+}
+.blob-a { width: 62vmax; height: 62vmax; left: -18vmax; top: -22vmax; }
+.blob-b { width: 48vmax; height: 48vmax; right: -16vmax; top: 18vh; animation-duration: 30s; animation-direction: alternate-reverse; }
+.blob-c { width: 54vmax; height: 54vmax; left: 22vw; bottom: -30vmax; animation-duration: 36s; }
+@keyframes blob-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(6vmax, 4vmax, 0) scale(1.15); }
+}
+.doodle {
+  position: absolute; color: var(--accent);
+  will-change: transform;
+  animation: doodle-float var(--d, 9s) ease-in-out infinite alternate;
+}
+@keyframes doodle-float {
+  from { transform: translate3d(0, 0, 0) rotate(var(--r, 0deg)); }
+  to { transform: translate3d(0, -22px, 0) rotate(calc(var(--r, 0deg) + 16deg)); }
+}

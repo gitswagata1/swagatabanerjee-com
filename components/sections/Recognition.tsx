@@ -9,7 +9,7 @@ export function Recognition() {
         {recognition.map((r, i) => (
           <li
             key={r.title}
-            className={`relative flex flex-col border border-line bg-paper p-5 transition-transform duration-300 ease-spring hover:-translate-y-1 hover:shadow-[5px_5px_0_var(--line)] ${
+            className={`relative flex flex-col border border-line bg-paper p-5 transition-transform duration-300 ease-spring hover:-translate-y-1 hover:shadow-[5px_5px_0_var(--shadow)] ${
               r.detail ? "sm:col-span-2 lg:col-span-1 lg:row-span-2" : ""
             }`}
           >

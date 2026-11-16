@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { Backdrop } from "@/components/Backdrop";
 import { Nav } from "@/components/Nav";
 import { Playful } from "@/components/Playful";
 import { profile } from "@/content/profile";
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fefdf9" },
-    { media: "(prefers-color-scheme: dark)", color: "#1b1d38" },
+    { media: "(prefers-color-scheme: dark)", color: "#121326" },
   ],
 };
 
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <Backdrop />
         <Nav />
         {children}
         <Playful />

@@ -45,7 +45,7 @@ export function Projects() {
             {/* Hover reveal: a taped-in drawing card (desktop, pointer devices only). */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute right-64 top-1/2 z-10 hidden w-60 -translate-y-1/2 rotate-2 scale-95 border border-line bg-paper p-4 opacity-0 shadow-[5px_5px_0_var(--line)] transition-[opacity,transform] duration-300 ease-calm group-hover:rotate-[-2deg] group-hover:scale-100 group-hover:opacity-100 lg:block"
+              className="pointer-events-none absolute right-64 top-1/2 z-10 hidden w-60 -translate-y-1/2 rotate-2 scale-95 border border-line bg-paper p-4 opacity-0 shadow-[5px_5px_0_var(--shadow)] transition-[opacity,transform] duration-300 ease-calm group-hover:rotate-[-2deg] group-hover:scale-100 group-hover:opacity-100 lg:block"
             >
               <span className="absolute -top-2 left-1/2 h-4 w-14 -translate-x-1/2 rotate-[-3deg] bg-accent/30" />
               <p className="sheet-label">DWG {p.index} / STACK</p>

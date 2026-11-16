@@ -54,7 +54,7 @@ export function Playful() {
       track("resume_download", { file: link.getAttribute("href") ?? "" });
     };
     document.addEventListener("click", celebrate);
-    console.log("%cHi 👋 you inspect pages too? Let's talk.", "font: 600 14px monospace; color: #838bcc");
+    console.log("%cHi 👋 you inspect pages too? Let's talk.", "font: 600 14px monospace; color: #6d4aff");
     return () => {
       document.removeEventListener("click", celebrate);
       window.removeEventListener("keydown", egg);

@@ -12,7 +12,7 @@ export function About() {
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
         {/* "Swagata in a text message" */}
         <div className="lg:col-span-5">
-          <div className="mx-auto max-w-sm rounded-[2rem] border border-line bg-paper p-4 shadow-[6px_6px_0_var(--line)]">
+          <div className="mx-auto max-w-sm rounded-[2rem] border border-line bg-paper p-4 shadow-[6px_6px_0_var(--shadow)]">
             <p className="text-center font-mono text-[11px] text-ink-2">
               {identity.shortName} · <IstClock />
             </p>
