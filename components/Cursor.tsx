@@ -34,7 +34,7 @@ export default function Cursor() {
         }
         if (ring.current) {
           ring.current.style.opacity = "1";
-          ring.current.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0) scale(${interactive ? 1.8 : 1})`;
+          ring.current.style.transform = `translate3d(${e.clientX - 8}px, ${e.clientY - 8}px, 0) scale(${interactive ? 1.6 : 1})`;
         }
         const next = (target?.closest?.("[data-magnetic]") as HTMLElement | null) ?? null;
         if (magnet && magnet !== next) magnet.style.translate = "";

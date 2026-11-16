@@ -307,7 +307,7 @@ html[data-loader] .loader {
   transition: opacity var(--dur-2) linear;
 }
 .cursor-ring {
-  z-index: 95; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--accent);
+  z-index: 95; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--accent);
   transition: transform var(--dur-1) var(--ease-calm), opacity var(--dur-2) linear;
 }
 [data-magnetic] { transition: translate var(--dur-2) var(--ease-spring), scale var(--dur-1) var(--ease-spring); }
