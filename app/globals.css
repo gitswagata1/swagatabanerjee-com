@@ -355,7 +355,7 @@ html[data-loader] .doodle-underline > svg { animation-delay: 1700ms; }
 @keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 @keyframes doodle-float {
   from { transform: translate3d(0, 0, 0) rotate(var(--r, 0deg)); }
-  to { transform: translate3d(0, -22px, 0) rotate(calc(var(--r, 0deg) + 16deg)); }
+  to { transform: translate3d(0, -14px, 0) rotate(calc(var(--r, 0deg) + 45deg)); }
 }
 
 /* ── Palette surfaces: children of .tints cycle pink → aqua → sky → lavender ── */
